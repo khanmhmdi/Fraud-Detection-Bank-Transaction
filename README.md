@@ -1,30 +1,22 @@
-# Fraud Detection in Bank Transactions
+# Fraud Detection in Bank Transactions [[Our Reference Paper](https://www.researchgate.net/publication/337322677_Graph_Transformer_Networks?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6Il9kaXJlY3QiLCJwYWdlIjoiX2RpcmVjdCJ9fQ&__cf_chl_rt_tk=HDxWqtkbv0UbhyrepL2pCFg4DVXOEKj0kaLvpcnCSW0-1724273332-0.0.1.1-8553).]
 
 This repository contains the solution for the Innotech AI Competition, focused on detecting fraudulent activities in bank transactions using advanced machine learning techniques. The project applies state-of-the-art algorithms to identify potentially fraudulent transactions with high accuracy.
 
+![Final Perpose Model(Graph Transformer)](https://github.com/khanmhmdi/Fraud-Detection-Bank-Transaction/blob/main/Perposed%20Model.png)
+
+![Final Perpose Model(Graph Transformer)](https://github.com/khanmhmdi/Fraud-Detection-Bank-Transaction/blob/main/Accuracy%20and%20Loss.png)
+
 ## Table of Contents
-- [Introduction](#introduction)
 - [Dataset](#dataset)
 - [Methodology](#methodology)
 - [Model Architecture](#model-architecture)
 - [Results](#results)
-- [Installation](#installation)
+- [Requirments](#Requirments)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [References](#references)
+- [Refrences](#Refrences)
 
-## Introduction
 
-Fraud detection is a critical challenge in financial institutions as fraudulent transactions can lead to significant financial losses and damage to the trust between banks and their customers. This project aims to develop a robust and scalable model to detect fraudulent transactions by analyzing patterns in transaction data. The solution is designed to be both accurate and efficient, suitable for real-time applications in the banking sector.
 
-## Dataset
-
-The dataset used for this project was provided by the Innotech AI Competition and contains a large number of bank transaction records, including both legitimate and fraudulent transactions. The data includes features such as transaction amount, transaction time, account age, and more.
-
-- **Dataset Source:** Provided by Innotech AI Competition.
-- **Number of Transactions:** [Specify the number of records].
-- **Number of Features:** [Specify the number of features].
 
 ## Methodology
 
@@ -51,42 +43,63 @@ The approach to fraud detection in this project involves several key steps:
 
 ## Model Architecture
 
-The final model architecture was selected based on performance and interpretability. The architecture used in this project is a [describe model architecture, e.g., Random Forest with 100 estimators, or a Neural Network with specific layers and activation functions]. The model includes features like [mention key features used in the model].
+- **Convolutions:**
+  - `conv1`: Edge Convolution (`EdgeConv`) for initial node feature aggregation.
+  - `conv2` & `conv3`: Transformer-based convolutions (`TransformerConv`) with skip connections for advanced feature extraction.
+- **Batch Normalization:**
+  - Applied after each convolutional layer to stabilize and accelerate training.
+- **Skip Connections:**
+  - Skip connections are integrated into the convolutional layers (`conv2` and `conv3`) to retain information from previous layers.
+- **Linear Layers:**
+  - `lin1`: Reduces the dimensionality of the features before the final classification.
+  - `lin`: Final classifier layer to output node class probabilities.
+- **Global Mean Pooling:**
+  - Aggregates node features into a graph-level representation.
 
-- **Model Type:** [Specify the model used, e.g., Random Forest, Neural Network]
-- **Hyperparameters:** [List key hyperparameters]
-- **Training Time:** [Provide training time, if relevant]
+### Forward Pass
+1. **Node Embeddings:**
+   - Nodes are passed through a series of convolutional layers with skip connections to refine their embeddings.
+2. **Readout Layer:**
+   - Node features are aggregated at the graph level using global mean pooling.
+3. **Classification:**
+   - The pooled features are passed through linear layers to predict the class of each node.
+
+### Training
+- **Optimizer:** Adam optimizer with a learning rate of 0.01.
+- **Loss Function:** Negative Log-Likelihood Loss (`NLLLoss`) for classification.
+
+
+## Dataset
+
+The dataset used for this project was provided by the Innotech AI Competition and contains a large number of bank transaction records, including both legitimate and fraudulent transactions. The data includes features such as transaction amount, transaction time, account age, and more.
+
+- **Dataset Source:** Provided by Innotech AI Competition.
+- **Number of Transactions:** 100K.
+- **Number of Features:** 10.
+
 
 ## Results
 
 The model was evaluated using the test set provided by the competition, and it achieved the following results:
 
-- **Accuracy:** [Specify accuracy]
-- **Precision:** [Specify precision]
-- **Recall:** [Specify recall]
-- **F1-Score:** [Specify F1-score]
-- **AUC-ROC:** [Specify AUC-ROC score]
+- **Accuracy:** 0.85
+- **Recall:** 0.83
+- **F1-Score:** 0.84
 
-These results demonstrate the model's effectiveness in detecting fraudulent transactions with a high degree of accuracy while maintaining a low rate of false positives.
+## Usage
 
-## Installation
+You can check the jupyter files out and find the solution. check them base on this order:
+1-Data Loader.ipynb
+2-model-with-node_attr.ipynb
 
-To replicate the results, clone this repository and install the necessary dependencies.
-
+## Requirments
 ```bash
-git clone https://github.com/yourusername/Fraud-Detection-Bank-Transaction.git
-cd Fraud-Detection-Bank-Transaction
-pip install -r requirements.txt
+Pytorch
+Pytorch geometric
+Numpy
+Pandas
+Matplotlib
 ```
+## References
 
----
-
-### Instructions to Customize:
-1. **Dataset Section:** Fill in the specifics of your dataset, such as the number of records and features.
-2. **Methodology Section:** Adjust the methodology steps to match what you've done in your project.
-3. **Model Architecture:** Provide more details about the model you used.
-4. **Results:** Include the actual results from your model evaluation.
-5. **References:** Add any academic papers or resources you referenced during your project.
-
-This structure should provide a clear and thorough overview of your project, making it easy for others to understand and replicate your work. Let me know if you need further customization or additional sections!
-
+* Yun, Seongjun, et al. "Graph Transformer Networks." International Conference on Learning Representations, 2020. [Link to paper](https://www.researchgate.net/publication/337322677_Graph_Transformer_Networks?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6Il9kaXJlY3QiLCJwYWdlIjoiX2RpcmVjdCJ9fQ&__cf_chl_rt_tk=HDxWqtkbv0UbhyrepL2pCFg4DVXOEKj0kaLvpcnCSW0-1724273332-0.0.1.1-8553).
