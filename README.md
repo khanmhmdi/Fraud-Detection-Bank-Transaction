@@ -11,9 +11,9 @@ This repository contains the solution for the Innotech AI Competition, focused o
 - [Methodology](#methodology)
 - [Model Architecture](#model-architecture)
 - [Results](#results)
-- [Requirments](#Requirments)
+- [Requirments](#requirments)
 - [Usage](#usage)
-- [Refrences](#Refrences)
+- [Refrences](#refrences)
 
 
 
@@ -100,6 +100,6 @@ Numpy
 Pandas
 Matplotlib
 ```
-## References
+## Refrences
 
 * Yun, Seongjun, et al. "Graph Transformer Networks." International Conference on Learning Representations, 2020. [Link to paper](https://www.researchgate.net/publication/337322677_Graph_Transformer_Networks?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6Il9kaXJlY3QiLCJwYWdlIjoiX2RpcmVjdCJ9fQ&__cf_chl_rt_tk=HDxWqtkbv0UbhyrepL2pCFg4DVXOEKj0kaLvpcnCSW0-1724273332-0.0.1.1-8553).
